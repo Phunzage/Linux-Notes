@@ -185,5 +185,157 @@ res2=20
 sum=50
 ```
 
-### 条件判断
+### 流程控制
 
+#### if else
+
+if 语句语法格式：
+
+```
+if condition
+then
+    command1 
+    command2
+    ...
+    commandN 
+fi
+```
+
+if else 语法格式：
+
+```
+if condition
+then
+    command1 
+    command2
+    ...
+    commandN
+else
+    command
+fi
+```
+
+if else-if else 语法格式：
+
+```
+if condition1
+then
+    command1
+elif condition2 
+then 
+    command2
+else
+    commandN
+fi
+```
+
+if else 的 [...] 判断语句中大于使用 -gt，小于使用 -lt。
+
+```
+if [ "$a" -gt "$b" ]; then
+    ...
+fi
+```
+
+如果使用 ((...)) 作为判断语句，大于和小于可以直接使用 > 和 <。
+
+```
+if (( a > b )); then
+    ...
+fi
+```
+
+#### for 循环
+
+for循环一般格式为：
+
+```
+for var in item1 item2 ... itemN
+do
+    command1
+    command2
+    ...
+    commandN
+done
+```
+
+写成一行：
+
+```
+for var in item1 item2 ... itemN; do command1; command2… done;
+```
+
+当变量值在列表里，for 循环即执行一次所有命令，使用变量名获取列表中的当前取值。命令可为任何有效的 shell 命令和语句。in 列表可以包含替换、字符串和文件名。
+
+in列表是可选的，如果不用它，for循环使用命令行的位置参数。
+
+#### while 语句
+
+while 循环用于不断执行一系列命令，也用于从输入文件中读取数据。其语法格式为：
+
+```
+while condition
+do
+    command
+done
+```
+
+#### until 循环
+
+until 循环执行一系列命令直至条件为 true 时停止。
+
+until 循环与 while 循环在处理方式上刚好相反。
+
+一般 while 循环优于 until 循环，但在某些时候—也只是极少数情况下，until 循环更加有用。
+
+until 语法格式:
+
+```
+until condition
+do
+    command
+done
+
+```
+condition 一般为条件表达式，如果返回值为 false，则继续执行循环体内的语句，否则跳出循环。
+
+#### case ... esac
+
+**case ... esac** 为多选择语句，与其他语言中的 switch ... case 语句类似，是一种多分支选择结构，每个 case 分支用右圆括号开始，用两个分号 ;; 表示 break，即执行结束，跳出整个 case ... esac 语句，esac（就是 case 反过来）作为结束标记。
+
+可以用 case 语句匹配一个值与一个模式，如果匹配成功，执行相匹配的命令。
+
+**case ... esac** 语法格式如下：
+
+```
+case 值 in
+模式1
+    command1
+    command2
+    ...
+    commandN
+    ;;
+模式2
+    command1
+    command2
+    ...
+    commandN
+    ;;
+esac
+```
+
+case 工作方式如上所示，取值后面必须为单词 **in**，每一模式必须以右括号结束。取值可以为变量或常数，匹配发现取值符合某一模式后，其间所有命令开始执行直至 ;;。
+
+取值将检测匹配的每一个模式。一旦模式匹配，则执行完匹配模式相应命令后不再继续其他模式。如果无一匹配模式，使用星号 * 捕获该值，再执行后面的命令。
+
+#### 跳出循环
+
+在循环过程中，有时候需要在未达到循环结束条件时强制跳出循环，Shell 使用两个命令来实现该功能：**break** 和 **continue**。
+
+##### break 命令
+
+break 命令允许跳出所有循环（终止执行后面的所有循环）。
+
+##### continue
+
+continue 命令与 break 命令类似，只有一点差别，它不会跳出所有循环，仅仅跳出当前循环。
