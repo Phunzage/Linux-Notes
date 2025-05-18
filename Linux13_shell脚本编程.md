@@ -69,10 +69,34 @@ echo ${MY_STRING:1:4}    // ello
 #### 数组变量
 
 ```
+创建数组
 MY_ARRAY=(1 2 3 4 5)
 
 读取数组
 echo ${MY_ARRAY[0]}    // 1
+
+关联数组
+declare -A site=(["google"]="www.google.com" ["runoob"]="www.runoob.com" ["taobao"]="www.taobao.com")
+或
+declare -A site  
+site["google"]="www.google.com"  
+site["runoob"]="www.runoob.com"  
+site["taobao"]="www.taobao.com"
+
+访问数组
+echo ${site["google"]}
+
+获取数组所有元素的值
+echo "数组的元素为: ${site[*]}"  
+echo "数组的元素为: ${site[@]}"
+
+获取数组的所有键
+echo "数组的键为: ${!site[*]}"  
+echo "数组的键为: ${!site[@]}"
+
+获取数组的长度
+echo "数组元素个数为: ${#site[*]}"  
+echo "数组元素个数为: ${#site[@]}"
 ```
 
 ### 特殊变量类型
@@ -89,6 +113,22 @@ echo ${MY_ARRAY[0]}    // 1
 
 ```
 编写：
+#!/bin/bash
+echo "执行的文件名：$0"
+echo "第一个参数为：$1"
+echo "第二个参数为：$2"
+echo "第三个参数为：$3"
+
+执行：
+sh ./test.sh 23 45 67
+
+输出
+执行的文件名：./test.sh
+第一个参数为：23
+第二个参数为：45
+第三个参数为：67
+
+
 #!/bin/bash
 echo "0=$0 1=$1 2=$2"
 echo "所有的参数=$*"
